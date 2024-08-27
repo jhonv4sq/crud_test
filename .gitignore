@@ -1,4 +1,4 @@
 .vscode
 db.sqlite3
-blog/_pycache_
-crud_test/_pycache_
+blog/__pycache__
+crud_test/__pycache__
