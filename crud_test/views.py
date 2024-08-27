@@ -8,6 +8,6 @@ def hello_world(request):
 
 def index(request):
     
-    context = {'greeting': 'Hello, World!'}
+    context = {'greeting': 'Hello World!'}
     
     return render(request, 'index.html', context)
