@@ -24,11 +24,15 @@ def show(request, id):
     post = get_object_or_404(Post, id=id)
     return render(request, 'blogs/show.html', {'post': post})
 
+def destroy(request, id):
+    post = get_object_or_404(Post, id=id)
+    post.delete()
+    return redirect('posts')
+
 # def edit(request):
 #     return ''
 
 # def update(request):
 #     return ''
 
-# def destroy(request):
-#     return ''
+
