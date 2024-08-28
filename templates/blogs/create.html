@@ -3,15 +3,16 @@
 {% block content %}
     <section class="container">
         <div class="row justify-content-center">
-            <form class="col-6">
+            <form class="col-md-6" method="post" action="{% url 'posts_store' %}">
+                {% csrf_token %}
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" >
+                    {{ form.title }}
                   </div>
     
                   <div class="mb-3">
                     <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+                    {{ form.content }}
                   </div>
     
                 <button type="submit" class="btn btn-primary">Submit</button>
