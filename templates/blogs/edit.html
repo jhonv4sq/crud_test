@@ -3,5 +3,22 @@
 {% block title %}Post - Update{% endblock %}
 
 {% block content %}
-
+    <section class="container">
+        <div class="row justify-content-center">
+            <form class="col-md-6" method="post" action="{% url '' post.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    {{ form.title }}
+                  </div>
+    
+                  <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    {{ form.content }}
+                  </div>
+    
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
 {% endblock %}

@@ -29,8 +29,10 @@ def destroy(request, id):
     post.delete()
     return redirect('posts')
 
-# def edit(request):
-#     return ''
+def edit(request, id):
+    post = get_object_or_404(Post, id=id)
+    form = PostForm(instance=post)
+    return render(request, 'blogs/create.html', {'form': form, 'post': post})
 
 # def update(request):
 #     return ''
