@@ -1,5 +1,12 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-
+    <section class="container">
+        <h1 class="text-center mb-5">{{ post.title }}</h1>
+        <div class="card">
+            <div class="card-body">
+                <p class="text-wrap">{{ post.content }}</p>
+            </div>
+        </div>
+    </section>
 {% endblock %}

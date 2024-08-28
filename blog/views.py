@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
 
@@ -19,6 +19,10 @@ def store(request):
         return redirect('posts')
     else:
         return render(request, 'blogs/create.html', {'form': form})
+    
+def show(request, id):
+    post = get_object_or_404(Post, id=id)
+    return render(request, 'blogs/show.html', {'post': post})
 
 # def edit(request):
 #     return ''
