@@ -32,9 +32,14 @@ def destroy(request, id):
 def edit(request, id):
     post = get_object_or_404(Post, id=id)
     form = PostForm(instance=post)
-    return render(request, 'blogs/create.html', {'form': form, 'post': post})
+    return render(request, 'blogs/edit.html', {'form': form, 'post': post})
 
-# def update(request):
-#     return ''
-
-
+def update(request, id):
+    post = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST, instance=post)
+    
+    if form.is_valid():
+        form.save()
+        return redirect('posts')
+    else:
+        return render(request, 'blogs/edit.html', {'form': form, 'post': post})
