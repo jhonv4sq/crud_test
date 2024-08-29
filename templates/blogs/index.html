@@ -10,27 +10,35 @@
   
             <thead>
               <tr>
-                <th scope="col">Id</th>
+                {% if user.is_authenticated %}<th scope="col">Id</th>{% endif %}
                 <th scope="col">Title</th>
-                <th scope="col">Opstions</th>
+                {% if user.is_authenticated %}<th scope="col">Opstions</th>{% endif %}
               </tr>
             </thead>
   
             <tbody>
               {% for post in posts %}
               <tr>
+                
+                {% if user.is_authenticated %}
                 <th scope="row">{{ post.id }}</th>
+                {% endif %}
+
                 <td>
                   <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="{% url 'posts_show' post.id %}">
                     {{ post.title }}
                   </a>
                 </td>
+
+                {% if user.is_authenticated %}
                 <td>
                     <a href="{% url 'posts_edit' post.id %}" class="btn btn-success btn-sm">Edit</a>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#post-{{ post.id }}">
                       Delete
                     </button>
                 </td>
+                {% endif %}
+
               </tr>
 
               <div class="modal fade" id="post-{{ post.id }}" tabindex="-1" aria-hidden="true">

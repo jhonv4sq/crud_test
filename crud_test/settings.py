@@ -125,3 +125,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'posts'  # Redirige a la lista de posts después del login
 LOGIN_URL = 'login'  # Página de login
+LOGOUT_REDIRECT_URL = 'index'  # Redirige al login después de cerrar sesión
