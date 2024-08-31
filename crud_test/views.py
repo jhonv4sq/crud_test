@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout, views as auth_views
+from django.contrib.auth import logout, login, views as auth_views
 from django.conf import settings
-from .forms import CustomAuthenticationForm
+from .forms import CustomAuthenticationForm, UserRegisterForm
 from .decorators import unauthenticated_user
 
 def hello_world(request):
@@ -24,3 +24,19 @@ def login_user(request):
     view = auth_views.LoginView.as_view(template_name=template, authentication_form=CustomAuthenticationForm)
     decorated_view = unauthenticated_user(view)
     return decorated_view(request)
+
+@unauthenticated_user
+def register_user_view(request):
+    form = UserRegisterForm()
+    return render(request, 'auth/register.html', {'form': form})
+
+@unauthenticated_user
+def register_user(request):
+    form = UserRegisterForm(request.POST)
+    if form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect(settings.LOGIN_REDIRECT_URL)
+    else:
+        return render(request, 'auth/register.html', {'form': form})
+        
