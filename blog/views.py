@@ -18,7 +18,9 @@ def store(request):
     form = PostForm(request.POST)
     
     if form.is_valid():
-        form.save()    
+        post = form.save(commit=False)  # Crea una instancia del modelo Post pero no la guarda en la base de datos
+        post.user_id = request.user.id  # Asigna el usuario logueado como autor del post
+        post.save()  # Ahora guarda el post en la base de datos, con el autor asignado
         return redirect('posts')
     else:
         return render(request, 'blogs/create.html', {'form': form})
