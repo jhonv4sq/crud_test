@@ -19,11 +19,11 @@ def logout_user(request):
     logout(request)
     return redirect(settings.LOGOUT_REDIRECT_URL)
 
+@unauthenticated_user
 def login_user(request):
     template = 'auth/login.html'
     view = auth_views.LoginView.as_view(template_name=template, authentication_form=CustomAuthenticationForm)
-    decorated_view = unauthenticated_user(view)
-    return decorated_view(request)
+    return view(request)
 
 @unauthenticated_user
 def register_user_view(request):
